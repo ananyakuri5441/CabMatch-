@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CabMatch | Ride Dispatch & Fleet Balancing</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon">C</span><span>Cab<span class="brand-light">Match</span></span></div>
+    <div class="side-label">WORKSPACE</div>
+    <a class="nav active" href="#overview">▦ <span>Overview</span></a>
+    <a class="nav" href="#book">＋ <span>Book a ride</span></a>
+    <a class="nav" href="#fleet">♧ <span>Fleet</span></a>
+    <div class="sidebar-bottom"><div class="avatar">AD</div><div><b>Admin Demo</b><small>Fleet manager</small></div></div>
+  </aside>
+
+  <main class="main" id="overview">
+    <header class="topbar">
+      <div><div class="eyebrow">MONDAY, NOVEMBER 23</div><h1>Good afternoon 👋</h1><p class="muted">Here's what's happening with your fleet today.</p></div>
+      <div class="top-actions"><span class="live-dot"></span><span class="live-text">System operational</span><button class="primary small" onclick="scrollToBooking()">＋ New ride</button></div>
+    </header>
+
+    <section class="stats">
+      <article class="stat-card"><div class="stat-top"><span>Total rides</span><span class="stat-icon purple">↗</span></div><strong id="totalRides">128</strong><small class="positive">↑ 12% <span>vs. yesterday</span></small></article>
+      <article class="stat-card"><div class="stat-top"><span>Active drivers</span><span class="stat-icon green">♧</span></div><strong id="activeDrivers">8</strong><small class="muted">Across your service area</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Available vehicles</span><span class="stat-icon blue">▣</span></div><strong id="availableCars">5</strong><small class="muted">Ready for dispatch</small></article>
+      <article class="stat-card"><div class="stat-top"><span>Avg. pickup time</span><span class="stat-icon orange">◷</span></div><strong>4.8 <em>min</em></strong><small class="positive">↓ 8% <span>faster this week</span></small></article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel booking-panel" id="book">
+        <div class="panel-heading"><div><div class="eyebrow">QUICK DISPATCH</div><h2>Book a ride</h2></div><span class="pill">Smart matching on</span></div>
+        <form id="rideForm">
+          <label for="pickup">Pickup location</label>
+          <div class="field"><span class="field-dot pickup-dot"></span><input id="pickup" placeholder="e.g. Indiranagar, Bengaluru" required /></div>
+          <div class="route-line"></div>
+          <label for="dropoff">Drop-off location</label>
+          <div class="field"><span class="field-dot drop-dot"></span><input id="dropoff" placeholder="e.g. MG Road, Bengaluru" required /></div>
+          <label for="rideType">Vehicle type</label>
+          <select id="rideType"><option value="Any">Any available vehicle</option><option value="Mini">Mini</option><option value="Sedan">Sedan</option><option value="SUV">SUV</option></select>
+          <div class="form-row"><div><label for="passengers">Passengers</label><select id="passengers"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div><div><label for="schedule">Ride time</label><select id="schedule"><option>Now</option><option>Schedule later</option></select></div></div>
+          <button class="primary dispatch-btn" type="submit">Find best driver <span>→</span></button>
+          <p class="form-note">CabMatch assigns the closest suitable available driver.</p>
+        </form>
+        <div id="matchResult" class="match-result hidden" aria-live="polite"></div>
+      </article>
+
+      <article class="panel fleet-panel" id="fleet">
+        <div class="panel-heading"><div><div class="eyebrow">LIVE FLEET</div><h2>Driver availability</h2></div><button class="text-btn" onclick="renderDrivers()">Refresh ↻</button></div>
+        <div class="fleet-summary"><div><strong id="fleetAvailable">5</strong><small>Available</small></div><div><strong id="fleetBusy">3</strong><small>On trip</small></div><div><strong id="fleetOffline">2</strong><small>Offline</small></div></div>
+        <div class="driver-list" id="driverList"></div>
+        <div class="balance-box"><div class="balance-icon">⚖</div><div><b>Fleet balancing</b><p id="balanceMessage">Fleet distribution looks balanced across the service area.</p></div></div>
+      </article>
+    </section>
+
+    <section class="panel activity-panel">
+      <div class="panel-heading"><div><div class="eyebrow">DISPATCH HISTORY</div><h2>Recent rides</h2></div><span class="pill neutral">Demo data</span></div>
+      <div class="table-wrap"><table><thead><tr><th>RIDE ID</th><th>ROUTE</th><th>DRIVER</th><th>FARE</th><th>STATUS</th></tr></thead><tbody id="rideTable">
+        <tr><td>#CM-1024</td><td>Indiranagar → MG Road</td><td>Rahul K.</td><td>₹245</td><td><span class="status completed">Completed</span></td></tr>
+        <tr><td>#CM-1023</td><td>Koramangala → HSR Layout</td><td>Priya S.</td><td>₹180</td><td><span class="status ongoing">In progress</span></td></tr>
+        <tr><td>#CM-1022</td><td>Jayanagar → Majestic</td><td>Arjun M.</td><td>₹310</td><td><span class="status completed">Completed</span></td></tr>
+      </tbody></table></div>
+    </section>
+    <footer>CabMatch · Ride Dispatch and Fleet Balancing <span>Student project demo</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
